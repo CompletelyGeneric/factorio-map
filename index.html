@@ -11,19 +11,22 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 <title>Factorio Maps</title>
 <!-- For local use, don't change anything. For server (making it available on a website) use, get a Google Maps API key (get one here: https://developers.google.com/maps/documentation/javascript/get-api-key), paste your key in the line below this one where it says "INSERTAPIKEY", uncomment the line below and two lines down delete the second <!-- and the first --> 
- <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=INSERTAPIKEY"></script> -->
- <!-- --> <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script> <!-- -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByUqBwYVxc3saGg2XGFiOoCRnZDGPpwAU"></script>
 <script>
 function CustomMapType() {}
 
-CustomMapType.prototype.tileSize = new google.maps.Size(2048,2048);
-CustomMapType.prototype.minZoom = 4;
+CustomMapType.prototype.tileSize = new google.maps.Size(1024,1024);
+CustomMapType.prototype.minZoom = 3;
 CustomMapType.prototype.maxZoom = 7;
 CustomMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
     var div = ownerDocument.createElement('DIV');
     var baseURL = 'Images/';
-    ext = "png";
-    baseURL += zoom + '_' + coord.x + '_' + coord.y + '.' + ext;
+                if (zoom === 7) {
+                ext = "png";
+            } else {
+                ext = "jpg";
+            }
+                baseURL += zoom + '_' + coord.x + '_' + coord.y + '.' + ext;
     div.style.width = this.tileSize.width + 'px';
     div.style.height = this.tileSize.height + 'px';
     div.style.backgroundImage = 'url(' + baseURL + ')';
@@ -62,8 +65,8 @@ if ("onhashchange" in window) {
 
 function initialize() {
     var mapOptions = {
-        zoom: 4,
-        // minZoom: 4,
+        zoom: 3,
+        // minZoom: 3,
         // maxZoom: 7,
         isPng: false,
         mapTypeControl: false,
